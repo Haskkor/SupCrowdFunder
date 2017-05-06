@@ -1,0 +1,32 @@
+package com.supinfo.supcrowdfunder.rest;
+
+import java.util.List;
+
+import javax.ws.rs.POST;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+
+import com.supinfo.supcrowdfunder.dao.DaoFactory;
+import com.supinfo.supcrowdfunder.dao.ProjectDao;
+import com.supinfo.supcrowdfunder.entity.Project;
+
+@Path("/projects")
+public class SupCrowdFunderResource {
+
+	private ProjectDao projDao = DaoFactory.getInstance().getProjectDao();
+	
+	@GET
+	public List<Project> getAllProjectsXml(){
+		return projDao.getAllProjects();
+	}
+	
+	@GET
+	@Path("/{id}")
+	public Project getProjectXml(@PathParam("id") long id){
+		return projDao.getProjectById(id);
+	}
+	
+	
+}
+
